@@ -1,16 +1,21 @@
-package com.graphqljava.tutorial.bookdetails;
+package com.graphqljava.tutorial.bookdetails.graphql;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
+import com.graphqljava.tutorial.bookdetails.service.profile.ProfileService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import graphql.schema.DataFetcher;
 
 @Component
 public class GraphQLDataFetchers {
+    @Autowired
+    private ProfileService profileService;
+
     private static List<Map<String, String>> books = Arrays.asList(
         ImmutableMap.of("id", "book-1", "name", "Harry Potter and the Philosopher's Stone", "pageCount", "223", "authorId", "author-1"),
         ImmutableMap.of("id", "book-2", "name", "Moby Dick", "pageCount", "635", "authorId", "author-2"),
@@ -41,6 +46,13 @@ public class GraphQLDataFetchers {
             .filter(author -> author.get("id").equals(authorId))
             .findFirst()
             .orElse(null);
+        };
+    }
+
+    public DataFetcher getProfileByIdDataFetcher() {
+        return dataFetchingEnvironment -> {
+            String profileEmail = dataFetchingEnvironment.getArgument("email");
+            return profileService.findProfileByEmail(profileEmail);
         };
     }
 }

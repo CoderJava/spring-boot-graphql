@@ -1,4 +1,4 @@
-package com.graphqljava.tutorial.bookdetails;
+package com.graphqljava.tutorial.bookdetails.graphql;
 
 import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 
@@ -52,6 +52,7 @@ public class GraphQLProvider {
         return RuntimeWiring.newRuntimeWiring()
                 .type(newTypeWiring("Query").dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher()))
                 .type(newTypeWiring("Book").dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher()))
+                .type(newTypeWiring("Query").dataFetcher("profileByEmail", graphQLDataFetchers.getProfileByIdDataFetcher()))
                 .build();
     }
 }

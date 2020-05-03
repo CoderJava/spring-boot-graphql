@@ -1,4 +1,4 @@
-package com.graphqljava.tutorial.bookdetails;
+package com.graphqljava.tutorial.bookdetails.graphql;
 
 import graphql.schema.DataFetchingEnvironment;
 

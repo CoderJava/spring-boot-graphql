@@ -1,5 +1,6 @@
 type Query {
     bookById(id: ID): Book
+    profileByEmail(email: String): Profile
 }
 
 type Book {
@@ -13,4 +14,11 @@ type Author {
     id: ID
     firstName: String
     lastName: String
+}
+
+type Profile {
+    id: ID
+    name: String
+    email: String
+    age: Int
 }
