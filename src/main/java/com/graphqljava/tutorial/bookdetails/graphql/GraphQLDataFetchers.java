@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
+import com.graphqljava.tutorial.bookdetails.db.profile.Profile;
 import com.graphqljava.tutorial.bookdetails.service.profile.ProfileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import graphql.schema.DataFetcher;
 
 @Component
@@ -28,7 +30,7 @@ public class GraphQLDataFetchers {
         ImmutableMap.of("id", "author-3", "firstName", "Anne", "lastName", "Rice")
     );
 
-    public DataFetcher getBookByIdDataFetcher() {
+    public DataFetcher<Map<String, String>> getBookByIdDataFetcher() {
         return dataFetchingEnvironment -> {
             String bookId = dataFetchingEnvironment.getArgument("id");
             return books.stream()
@@ -38,7 +40,7 @@ public class GraphQLDataFetchers {
         };
     }
 
-    public DataFetcher getAuthorDataFetcher() {
+    public DataFetcher<Map<String, String>> getAuthorDataFetcher() {
         return dataFetchingEnvironment -> {
             Map<String, String> book = dataFetchingEnvironment.getSource();
             String authorId = book.get("authorId");
@@ -49,10 +51,23 @@ public class GraphQLDataFetchers {
         };
     }
 
-    public DataFetcher getProfileByIdDataFetcher() {
+    public DataFetcher<Profile> getProfileByIdDataFetcher() {
         return dataFetchingEnvironment -> {
             String profileEmail = dataFetchingEnvironment.getArgument("email");
             return profileService.findProfileByEmail(profileEmail);
+        };
+    }
+
+    public DataFetcher<List<Profile>> getProfileByNameDataFetcher() {
+        return dataFetchingEnvironment -> {
+            String argName = dataFetchingEnvironment.getArgument("name");
+            return profileService.findProfileByName(argName);
+        };
+    }
+
+    public DataFetcher<List<Profile>> getAllProfileDataFetcher() {
+        return dataFetchingEnvironment -> {
+            return profileService.findAll();
         };
     }
 }

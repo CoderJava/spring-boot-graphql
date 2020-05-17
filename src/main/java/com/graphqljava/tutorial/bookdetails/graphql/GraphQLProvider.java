@@ -53,6 +53,8 @@ public class GraphQLProvider {
                 .type(newTypeWiring("Query").dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher()))
                 .type(newTypeWiring("Book").dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher()))
                 .type(newTypeWiring("Query").dataFetcher("profileByEmail", graphQLDataFetchers.getProfileByIdDataFetcher()))
+                .type(newTypeWiring("Query").dataFetcher("profileByName", graphQLDataFetchers.getProfileByNameDataFetcher()))
+                .type(newTypeWiring("Query").dataFetcher("allProfile", graphQLDataFetchers.getAllProfileDataFetcher()))
                 .build();
     }
 }

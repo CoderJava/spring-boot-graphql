@@ -34,6 +34,13 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public List<Profile> findProfileByName(String name) {
+        List<Profile> listProfile = new ArrayList<>();
+        profileDao.findByName(name).iterator().forEachRemaining(listProfile::add);
+        return listProfile;
+    }
+
+    @Override
     public void delete(long id) {
         profileDao.deleteById(id);
     }
