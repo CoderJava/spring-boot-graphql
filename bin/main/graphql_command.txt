@@ -1,0 +1,44 @@
+# mutation CreateProfile($input: CreateProfileInput){
+#   createProfile(input: $input) {
+#     name
+#     email
+#     age
+#   }
+# }
+
+# {
+#   allProfile {
+#     id
+#     name
+#     email
+#     age
+#   }
+#   profileByName(name: "Yudi Setiawan") {
+#     id
+#     name
+#     email
+#   }
+# }
+
+# query {
+#   allProfile {
+#     id
+#     name
+#     email
+#     age
+#   }
+# }
+
+# mutation EditProfile($input: EditProfileInput) {
+#   editProfile(input: $input) {
+#     status
+#     message
+#   }
+# }
+
+# mutation {
+#   deleteProfile(input: 2){
+#     status
+#     message
+#   }
+# }

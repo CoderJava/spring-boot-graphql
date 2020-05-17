@@ -26,11 +26,25 @@ type Profile {
     age: Int
 }
 
+type ResponseGeneral {
+    status: Boolean
+    message: String
+}
+
 type Mutation {
     createProfile(input: CreateProfileInput): Profile
+    editProfile(input: EditProfileInput): ResponseGeneral
+    deleteProfile(input: Int): ResponseGeneral
 }
 
 input CreateProfileInput {
+    name: String
+    email: String
+    age: Int
+}
+
+input EditProfileInput {
+    id: Int
     name: String
     email: String
     age: Int
