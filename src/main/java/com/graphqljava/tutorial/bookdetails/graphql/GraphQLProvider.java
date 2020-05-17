@@ -55,6 +55,7 @@ public class GraphQLProvider {
                 .type(newTypeWiring("Query").dataFetcher("profileByEmail", graphQLDataFetchers.getProfileByIdDataFetcher()))
                 .type(newTypeWiring("Query").dataFetcher("profileByName", graphQLDataFetchers.getProfileByNameDataFetcher()))
                 .type(newTypeWiring("Query").dataFetcher("allProfile", graphQLDataFetchers.getAllProfileDataFetcher()))
+                .type(newTypeWiring("Mutation").dataFetcher("createProfile", graphQLDataFetchers.createProfileDataFetcher()))
                 .build();
     }
 }

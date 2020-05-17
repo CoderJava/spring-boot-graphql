@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
+import com.graphqljava.tutorial.bookdetails.db.profile.CreateProfileInput;
 import com.graphqljava.tutorial.bookdetails.db.profile.Profile;
 import com.graphqljava.tutorial.bookdetails.service.profile.ProfileService;
 
@@ -68,6 +70,17 @@ public class GraphQLDataFetchers {
     public DataFetcher<List<Profile>> getAllProfileDataFetcher() {
         return dataFetchingEnvironment -> {
             return profileService.findAll();
+        };
+    }
+
+    public DataFetcher<Profile> createProfileDataFetcher() {
+        return dataFetchingEnviroment -> {
+            Map<String, Object> arg = dataFetchingEnviroment.getArgument("input");
+            System.out.println("argProfile: " + arg);
+            ObjectMapper mapper = new ObjectMapper();
+            CreateProfileInput createProfileInput = mapper.convertValue(arg, CreateProfileInput.class);
+            Profile profile = new Profile(createProfileInput.getId(), createProfileInput.getName(), createProfileInput.getEmail(), createProfileInput.getAge());
+            return profileService.save(profile);
         };
     }
 }

@@ -24,3 +24,14 @@ type Profile {
     email: String
     age: Int
 }
+
+type Mutation {
+    createProfile(input: CreateProfileInput): Profile
+}
+
+input CreateProfileInput {
+    id: Int
+    name: String
+    email: String
+    age: Int
+}
