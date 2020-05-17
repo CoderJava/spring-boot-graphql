@@ -1,5 +1,6 @@
 type Query {
     bookById(id: ID): Book
+    profileById(id: Int): Profile
     profileByEmail(email: String): Profile
     profileByName(name: String): [Profile]
     allProfile: [Profile]
@@ -30,7 +31,6 @@ type Mutation {
 }
 
 input CreateProfileInput {
-    id: Int
     name: String
     email: String
     age: Int

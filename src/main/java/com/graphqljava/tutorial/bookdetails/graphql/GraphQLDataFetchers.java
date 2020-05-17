@@ -53,9 +53,16 @@ public class GraphQLDataFetchers {
         };
     }
 
-    public DataFetcher<Profile> getProfileByIdDataFetcher() {
+    public DataFetcher<Profile> getProfileById() {
         return dataFetchingEnvironment -> {
-            String profileEmail = dataFetchingEnvironment.getArgument("email");
+            Long profileId = dataFetchingEnvironment.getArgument("id");
+            return profileService.findProfileById(profileId);
+        };
+    }
+
+    public DataFetcher<List<Profile>> getProfileByEmailDataFetcher() {
+        return dataFetchingEnviroment -> {
+            String profileEmail = dataFetchingEnviroment.getArgument("email");
             return profileService.findProfileByEmail(profileEmail);
         };
     }
@@ -79,7 +86,7 @@ public class GraphQLDataFetchers {
             System.out.println("argProfile: " + arg);
             ObjectMapper mapper = new ObjectMapper();
             CreateProfileInput createProfileInput = mapper.convertValue(arg, CreateProfileInput.class);
-            Profile profile = new Profile(createProfileInput.getId(), createProfileInput.getName(), createProfileInput.getEmail(), createProfileInput.getAge());
+            Profile profile = new Profile(0, createProfileInput.getName(), createProfileInput.getEmail(), createProfileInput.getAge());
             return profileService.save(profile);
         };
     }

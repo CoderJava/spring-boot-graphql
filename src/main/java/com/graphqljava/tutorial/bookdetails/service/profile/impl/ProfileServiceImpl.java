@@ -22,6 +22,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public Profile findProfileById(Long id) {
+        return profileDao.findById(id).orElse(null);
+    }
+
+    @Override
     public List<Profile> findAll() {
         List<Profile> listProfile = new ArrayList<>();
         profileDao.findAll().iterator().forEachRemaining(listProfile::add);
@@ -29,8 +34,10 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile findProfileByEmail(String email) {
-        return profileDao.findByEmail(email);
+    public List<Profile> findProfileByEmail(String email) {
+        List<Profile> listProfile = new ArrayList<>();
+        profileDao.findByEmail(email).iterator().forEachRemaining(listProfile::add);
+        return listProfile;
     }
 
     @Override

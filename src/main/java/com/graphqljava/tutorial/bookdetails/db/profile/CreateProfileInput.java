@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateProfileInput {
-    private long id;    
     private String name;
     private String email;
     private int age;
